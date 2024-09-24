@@ -56,3 +56,19 @@ end
 
 battery_watcher = hs.battery.watcher.new(on_battery_changed)
 battery_watcher:start()
+
+-- copy the location on goland and open the position on gitlab
+hs.hotkey.bind({"cmd", "alt"}, "G", function()
+    local window = hs.window.focusedWindow()
+    local application = window and window:application()
+    
+    if application and application:name() == "GoLand" then
+        hs.eventtap.keyStroke({"cmd", "alt", "shift"}, "C")
+        hs.timer.doAfter(0.1, function()
+            local clipboard = hs.pasteboard.getContents()
+            clipboard = clipboard:gsub(":", "#L")
+            local url = "https://gitlab.com/refurbed/engineering/platform/blob/master/" .. clipboard
+            hs.urlevent.openURL(url)
+        end)
+    end
+end)
