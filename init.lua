@@ -66,9 +66,11 @@ hs.hotkey.bind({"cmd", "alt"}, "G", function()
         hs.eventtap.keyStroke({"cmd", "alt", "shift"}, "C")
         hs.timer.doAfter(0.1, function()
             local clipboard = hs.pasteboard.getContents()
-            clipboard = clipboard:gsub(":", "#L")
-            local url = "https://gitlab.com/refurbed/engineering/platform/blob/master/" .. clipboard
+            gitlab_position = clipboard:gsub(":", "#L")
+            local url = "https://gitlab.com/refurbed/engineering/platform/blob/master/" .. gitlab_position
             hs.urlevent.openURL(url)
+            local markdown = "[" .. clipboard .. "](" .. url .. ")"
+            hs.pasteboard.setContents(markdown)
         end)
     end
 end)
