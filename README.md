@@ -3,8 +3,15 @@
 brew install --cask hammerspoon
 ```
 
-### Clone this into ~/.hammerspoon
+### Clone this into some directory
 
 ```
-git clone https://github.com/abdusco/hammerspoon ~/.hammerspoon
+mkdir -p ~/dev/mac/hammerspoon
+git clone https://github.com/abdusco/hammerspoon ~/dev/mac/hammerspoon
+```
+
+Tell hammerspoon to load that file
+
+```
+defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/dev/mac/hammerspoon/init.lua"
 ```
